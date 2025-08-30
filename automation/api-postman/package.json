@@ -1,0 +1,11 @@
+{
+  "name": "igaming-api-postman",
+  "private": true,
+  "version": "1.0.0",
+  "scripts": {
+    "test": "newman run collection.json -e environment.json --reporters cli"
+  },
+  "devDependencies": {
+    "newman": "^6.1.0"
+  }
+}

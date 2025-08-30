@@ -1,0 +1,8 @@
+{
+  "name": "igaming-perf-k6",
+  "private": true,
+  "version": "1.0.0",
+  "scripts": {
+    "smoke": "k6 run script.js"
+  }
+}

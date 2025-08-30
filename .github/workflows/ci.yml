@@ -1,0 +1,58 @@
+name: QA CI
+
+on:
+  push:
+  pull_request:
+
+jobs:
+  ui:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 20
+      - name: Install Playwright deps
+        run: |
+          cd automation/ui-playwright
+          npm ci
+          npx playwright install --with-deps
+      - name: Run UI tests
+        env:
+          BASE_URL: ${{ secrets.BASE_URL || 'https://demo.igaming.example' }}
+          TEST_USERNAME: ${{ secrets.TEST_USERNAME }}
+          TEST_PASSWORD: ${{ secrets.TEST_PASSWORD }}
+          KYC_DOC_PATH: data/kyc-id.png
+        run: |
+          cd automation/ui-playwright
+          npm test
+
+  api:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 20
+      - name: Run Newman
+        run: |
+          cd automation/api-postman
+          npm ci
+          npm test
+
+  perf-smoke:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: grafana/setup-k6-action@v1
+      - name: k6 smoke
+        env:
+          API_BASE_URL: ${{ secrets.API_BASE_URL || 'https://api.demo.igaming.example' }}
+          TEST_USERNAME: ${{ secrets.TEST_USERNAME }}
+          TEST_PASSWORD: ${{ secrets.TEST_PASSWORD }}
+          K6_VUS: 2
+          K6_DURATION: 30s
+        run: |
+          cd automation/perf-k6
+          npm ci || true
+          npm run smoke

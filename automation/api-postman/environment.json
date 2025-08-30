@@ -1,0 +1,21 @@
+{
+  "id": "igaming-env",
+  "name": "Local",
+  "values": [
+    {
+      "key": "API_BASE_URL",
+      "value": "https://api.demo.igaming.example",
+      "type": "text"
+    },
+    {
+      "key": "TEST_USERNAME",
+      "value": "user@example.com",
+      "type": "text"
+    },
+    {
+      "key": "TEST_PASSWORD",
+      "value": "P@ssw0rd!",
+      "type": "text"
+    }
+  ]
+}

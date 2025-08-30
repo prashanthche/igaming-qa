@@ -1,0 +1,6 @@
+TestID,Title,Preconditions,Steps,Expected,Severity,Type
+UI-REG-001,Register New User,,/register > fill form > submit,Account created or verify email banner,Critical,Functional
+UI-PAY-001,Deposit via Card Sandbox,Logged-in,/wallet > deposit > card > confirm,Balance increases,Critical,Functional
+UI-BET-001,Place Single Bet,Balance >= 10,Pick market > add to betslip > place bet,Bet accepted,Critical,E2E
+UI-RG-001,Self-Exclusion,Logged-in,Profile > RG > Self-exclude,Login blocked thereafter,High,Compliance
+UI-GEO-001,Blocked Country,,From blocked IP open site,Access denied,High,Compliance
